@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "ragkitpy"
+version = "0.1.0"
+description = "A lightweight RAG pipeline toolkit powered by HuggingFace"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [{name = "Srinath Dhumnor", email = "dhumnorsrinath06052002@gmail.com"}]
+requires-python = ">=3.8"
+dependencies = [
+    "sentence-transformers",
+    "faiss-cpu",
+    "pypdf",
+    "transformers"
+]
+
+[project.urls]
+Homepage = "https://github.com/SRINATH-GITHU/ragkitpy.git"
