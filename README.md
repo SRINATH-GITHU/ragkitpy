@@ -153,7 +153,7 @@ ragkitpy/
 
 Contributions are welcome! Please read [CONTRIBUTING.md](CONTRIBUTING.md) first.
 ```bash
-git clone https://github.com/YOURUSERNAME/ragkitpy.git
+git clone https://github.com/SRINATH-GITHU/ragkitpy.git
 cd ragkitpy
 pip install -e ".[dev]"
 pytest tests/ -v
@@ -169,7 +169,7 @@ MIT License — see [LICENSE](LICENSE) for details.
 
 ## 👨‍💻 Author
 
-Built by **Your Name** as an open-source contribution to the GenAI community.
+Built by **Srinath Dhumnor** as an open-source contribution to the GenAI community.
 
 ⭐ Star this repo if it helped you!
 ```
