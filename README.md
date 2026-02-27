@@ -180,7 +180,7 @@ Also write your `LICENSE` file (MIT):
 ```
 MIT License
 
-Copyright (c) 2025 Your Name
+Copyright (c) 2025 Srinath Dhumnor
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
