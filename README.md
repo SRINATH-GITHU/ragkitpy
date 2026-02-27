@@ -176,7 +176,11 @@ Built by **Srinath Dhumnor** as an open-source contribution to the GenAI communi
 
 ---
 
-Also write your `LICENSE` file (MIT):
+Built by Srinath Dhumnoor as an open-source contribution to the GenAI community.
+
+If this project helped you build something cool, ⭐ star the repo — it really helps others discover it!
+
+Questions, ideas or feedback? Feel free to open an issue. 🚀
 ```
 MIT License
 
