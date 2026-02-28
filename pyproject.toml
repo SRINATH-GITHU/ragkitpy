@@ -28,6 +28,7 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = ["pytest>=7.0", "pytest-anyio"]
+generate = ["transformers"]
 
 [project.urls]
 Homepage = "https://github.com/SRINATH-GITHU/ragkitpy"
