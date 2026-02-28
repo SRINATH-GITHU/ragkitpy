@@ -117,6 +117,50 @@ class RAGPipeline:
         query_vector = self.embedder.embed_single(question)
         return self.store.search_with_scores(query_vector, top_k=top_k)
 
+    def answer(self, question: str, top_k: int = 3, model: str = "google/flan-t5-base") -> str:
+        """Retrieve relevant chunks and generate an answer using a text2text model.
+
+        This method is intentionally separate from :meth:`query` so that the
+        core retrieval logic remains untouched. The HuggingFace ``transformers``
+        library is imported lazily on first call to avoid adding an early
+        dependency for users who only need basic retrieval.
+
+        Args:
+            question (str): The user question.
+            top_k (int): Number of chunks to retrieve for context (default 3).
+            model (str): HuggingFace text2text-generation model to use.
+                         Default is ``google/flan-t5-base`` (CPU-friendly).
+
+        Returns:
+            str: Generated answer text.
+        """
+        # Step 1 - retrieve top-k chunks using existing query logic
+        chunks = self.query(question, top_k=top_k)
+
+        # join into a single context string
+        context = "\n".join(chunks)
+
+        # build prompt with simple instructions
+        prompt = f"Context:\n{context}\n\nQuestion: {question}\nAnswer:"
+
+        # lazy import transformers and create pipeline
+        try:
+            from transformers import pipeline
+        except ImportError as e:
+            raise ImportError(
+                "The 'transformers' package is required for answer() but not installed. "
+                "Install it via 'pip install ragkitpy[generate]' or add it to your deps."
+            ) from e
+
+        gen = pipeline("text2text-generation", model=model)
+        output = gen(prompt, max_length=512, do_sample=False)
+
+        # the transformer's pipeline returns a list of dicts
+        if isinstance(output, list) and output:
+            return output[0].get("generated_text", "").strip()
+        # fallback
+        return str(output)
+
     def _check_ready(self) -> None:
         if not self._document_loaded or self.store is None:
             raise RuntimeError(

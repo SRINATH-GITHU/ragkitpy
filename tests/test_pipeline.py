@@ -1,7 +1,10 @@
 # tests/test_pipeline.py
+import sys, os
+# ensure local package is imported instead of any installed version
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 import pytest
 import tempfile
-import os
 from ragkitpy.pipeline import RAGPipeline
 
 
@@ -81,3 +84,23 @@ def test_empty_query_raises(loaded_pipeline):
 def test_repr(loaded_pipeline):
     r = repr(loaded_pipeline)
     assert "RAGPipeline" in r
+
+
+def test_answer_returns_string(loaded_pipeline):
+    # skip if transformers isn't available; optional dependency
+    pytest.importorskip("transformers")
+    # basic smoke test for generation; should not error and produce text
+    ans = loaded_pipeline.answer("What is RAG?")
+    assert isinstance(ans, str)
+    assert len(ans) > 0
+
+
+def test_answer_before_load_raises():
+    rag = RAGPipeline()
+    with pytest.raises(RuntimeError):
+        rag.answer("Is anyone there?")
+
+
+def test_empty_answer_question_raises(loaded_pipeline):
+    with pytest.raises(ValueError):
+        loaded_pipeline.answer("")
