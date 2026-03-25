@@ -15,7 +15,7 @@ from ragkitpy.chunker import chunk_text
 from ragkitpy.embedder import HFEmbedder
 from ragkitpy.vectorstore import VectorStore
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 __author__ = "Srinath Dhumnor"
 
 __all__ = [
